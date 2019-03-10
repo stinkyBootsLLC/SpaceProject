@@ -49,8 +49,9 @@ public class SpaceProject_MainTest {
         System.out.println(phase2Items);
         //test1.loadItems(phase2);
        
-        
-        
+        // test the U1 default
+        U1 u1 = new U1();
+        System.out.println(u1.toString());
         
         
         
