@@ -50,9 +50,11 @@ import java.util.*;
 public class Simulation {
     
     private final ArrayList allitems;
+    private ArrayList<Item> cargoItems; // arraylist of Objects
 
     public Simulation() {
         allitems = new ArrayList();
+        cargoItems = new ArrayList<Item>();
     }// default constructor
     
     /**
@@ -79,10 +81,11 @@ public class Simulation {
                 // assign to a String and Int to send to the itemLine object
                 String name = itemArray[0];
                 int weight = Integer.parseInt(itemArray[1]);
-                //create an Item object 
-                Item item = new Item(name, weight);
+                // build the object array list of Item objects
+                cargoItems.add( new Item(name, weight));
+              
                 // debug
-                System.out.println(item.toString());
+                //System.out.println(cargoItems.toString());
                 // build the arrayList
                 for (String items : itemArray) {
                 //and then add it to an ArrayList of Items. 
