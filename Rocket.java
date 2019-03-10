@@ -16,23 +16,41 @@ package spaceproject;
  * @author eduardo
  */
 public class Rocket implements SpaceShip{
-
+    
+    // declare variables
+    public int rocketCost;  
+    public float rocketWeight; 
+    public float cargoMaxWeight;
+    public float totalWeightLimit;
+    public double chanceOfLandingCrash;
+    public double chanceOfLaunchExplosion; 
+    
     public Rocket() {
+        rocketCost = 0;  
+        rocketWeight = 0f; 
+        cargoMaxWeight = 0f;  
+        totalWeightLimit = 0f;
+        chanceOfLandingCrash = 0;
+        chanceOfLaunchExplosion = 0;
     }// default constructor
     
     
-
+    /**
+     * launch and land methods in the Rocket class should always return true
+     * @return 
+     */
     @Override
     public boolean launch() {
-        //launch and land methods in the Rocket class should always return true
         return true;
-    }
-
+    }// end launch()
+    /**
+     * launch and land methods in the Rocket class should always return true
+     * @return 
+     */
     @Override
     public boolean land() {
-        //launch and land methods in the Rocket class should always return true
         return true;
-    }
+    }// end land()
 
     @Override
     public boolean canCarry() {
@@ -52,6 +70,17 @@ public class Rocket implements SpaceShip{
     // have to load up the rocket and calculate the total weight
     public void setTotalWeight(){
         
-    }// end calculateTotalWeight
+    }// end setTotalWeight
+
+    @Override
+    public String toString() {
+        return "rocketCost=" + rocketCost + ", \nrocketWeight=" 
+                + rocketWeight + ", \ncargoMaxWeight=" + cargoMaxWeight 
+                + ", \ntotalWeightLimit=" + totalWeightLimit 
+                + ", \nchanceOfLandingCrash=" + chanceOfLandingCrash 
+                + ", \nchanceOfLaunchExplosion=" + chanceOfLaunchExplosion + "\n";
+    }// end toString()
+    
+    
     
 }// end SpaceShip
