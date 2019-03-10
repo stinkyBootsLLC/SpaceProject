@@ -35,6 +35,13 @@ public class Item {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" + "name = " + name + ", weight = " + weight + " kg}";
+    }
+    
+    
     
     
     
