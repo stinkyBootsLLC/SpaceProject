@@ -38,7 +38,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" + "name = " + name + ", weight = " + weight + " kg}";
+        return "Item{" + "name = " + name + ", weight = " + weight + " kg}\n";
     }
     
     

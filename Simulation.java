@@ -4,14 +4,19 @@
 
     loadItems: this method loads all items from a text file and returns an 
     ArrayList of Items:
-    Each line in the text file consists of the itemLine name followed by = then its 
+    Each line in the text file consists of the itemLine name followed by = 
+    then its 
     weigh in kg. For example:
 
     loadItems should read the text file line by line and create an Item object 
     for each and then add it to an ArrayList of Items. The method should then 
     return that ArrayList.
 
-loadU1: this method takes the ArrayList of Items returned from loadItems and starts creating U1 rockets. It first tries to fill up 1 rocket with as many items as possible before creating a new rocket object and filling that one until all items are loaded. The method then returns the ArrayList of those U1 rockets that are fully loaded.
+loadU1: this method takes the ArrayList of Items returned from loadItems and 
+starts creating U1 rockets. It first tries to fill up 1 rocket with as many 
+items as possible before creating a new rocket object and filling that one until 
+all items are loaded. The method then returns the ArrayList of those U1 rockets 
+that are fully loaded.
 loadU2: this method also takes the ArrayList of Items and starts creating U2 rockets and filling them with those items the same way as with U1 until all items are loaded. The method then returns the ArrayList of those U2 rockets that are fully loaded.
 runSimulation: this method takes an ArrayList of Rockets and calls launch and land methods for each of the rockets in the ArrayList. Every time a rocket explodes or crashes (i.e if launch or land return false) it will have to send that rocket again. All while keeping track of the total budget required to send each rocket safely to Mars. runSimulation then returns the total budget required to send all rockets (including the crashed ones).
 
@@ -50,7 +55,7 @@ import java.util.*;
 public class Simulation {
     
     private final ArrayList allitems;
-    private ArrayList<Item> cargoItems; // arraylist of Objects
+    private ArrayList cargoItems; // arraylist of Objects
 
     public Simulation() {
         allitems = new ArrayList();
@@ -62,7 +67,7 @@ public class Simulation {
      * Each line in the text file consists of the itemLine name followed by 
      * = then its weigh in kg.For example: habitat=100000
      * @param fileName
-     * @return 
+     * @return  cargoItems
      */
     public ArrayList loadItems(File fileName){
         // this file has to be seperated
@@ -99,10 +104,26 @@ public class Simulation {
         }// end try catch
         
         // The method should then return that ArrayList.
-        return allitems;
+        return cargoItems;
     }// end loadItems
     
     public void loadU1(){
+        
+                 
+        // this is the file in the directory
+        File phase1 = new File("phase-1.txt");
+        // create an instance of the simulation class
+        Simulation test1 = new Simulation();
+        // loadItems will return an arrayList
+        ArrayList<Item> phase1Items = new ArrayList<Item>();
+         // call the loadItems method and pass the file
+        phase1Items = test1.loadItems(phase1);
+        // debug print the list
+        //System.out.println(phase1Items);
+        //test1.loadItems(phase2);
+        int cargoListSize = phase1Items.size();
+        
+    
         
         /*
         loadU1: this method takes the ArrayList of Items returned from 
@@ -113,11 +134,32 @@ public class Simulation {
         It first tries to fill up 
         1 rocket with as many items as possible before creating a new rocket 
         object and filling that one until all items are loaded. 
+        
+        
         The method then returns the ArrayList of those U1 rockets 
         that are fully loaded.
 
         
         */
+  
+        U1 u1rocket = new U1();
+        // load the cargo
+        for (int i = 0; i < cargoListSize; i++) {
+            Item item = new Item();
+            item = phase1Items.get(i);
+            
+            u1rocket.calculateCargoWeight(item);
+        }
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     }// end loadU1
     

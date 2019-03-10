@@ -23,37 +23,40 @@ public class SpaceProject_MainTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /* PHASE 1 TEST */
-        // this is the file in the directory
-        File phase1 = new File("phase-1.txt");
-        // create an instance of the simulation class
-        Simulation test1 = new Simulation();
-        // loadItems will return an arrayList
-        ArrayList phase1Items = new ArrayList();
-         // call the loadItems method and pass the file
-        phase1Items = test1.loadItems(phase1);
-        // debug print the list
-        System.out.println(phase1Items);
-        //test1.loadItems(phase2);
-        
-        /* PHASE 2 TEST */
-        // this is the file in the directory
-        File phase2 = new File("phase-2.txt");
-        // create an instance of the simulation class
-        Simulation test2 = new Simulation();
-        // loadItems will return an arrayList
-        ArrayList phase2Items = new ArrayList();
-         // call the loadItems method and pass the file
-        phase2Items = test2.loadItems(phase2);
-        // debug print the list
-        System.out.println(phase2Items);
-        //test1.loadItems(phase2);
+//        /* PHASE 1 TEST */
+//        // this is the file in the directory
+//        File phase1 = new File("phase-1.txt");
+//        // create an instance of the simulation class
+//        Simulation test1 = new Simulation();
+//        // loadItems will return an arrayList
+//        ArrayList phase1Items = new ArrayList();
+//         // call the loadItems method and pass the file
+//        phase1Items = test1.loadItems(phase1);
+//        // debug print the list
+//        System.out.println(phase1Items);
+//        //test1.loadItems(phase2);
+    
+//        /* PHASE 2 TEST */
+//        // this is the file in the directory
+//        File phase2 = new File("phase-2.txt");
+//        // create an instance of the simulation class
+//        Simulation test2 = new Simulation();
+//        // loadItems will return an arrayList
+//        ArrayList phase2Items = new ArrayList();
+//         // call the loadItems method and pass the file
+//        phase2Items = test2.loadItems(phase2);
+//        // debug print the list
+//        System.out.println(phase2Items);
+//        //test1.loadItems(phase2);
        
-        // test the U1 default
-        U1 u1 = new U1();
-        System.out.println(u1.toString());
+//        // test the U1 default
+//        U1 u1 = new U1();
+//        System.out.println(u1.toString());
+
+        Simulation sim = new Simulation();
+        sim.loadU1();
         
-        
+     
         
     }// end main
     

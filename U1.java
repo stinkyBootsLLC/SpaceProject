@@ -23,6 +23,7 @@ public class U1 extends Rocket{
     // declare variables
 
     public static int U1_totalWeight;// cargo + rocket
+    public static int totalCargoWeight; // all items
 
     public U1() {
         super.rocketCost = 100000000;  // It costs $100 Million to build
@@ -62,12 +63,13 @@ public class U1 extends Rocket{
     equation for each. 
         
     */
+        System.out.println("LAUNCH");
         return true;
     }// end land
     
     // have to load up the rocket and calculate the total weight
 
-    public void calculateTotalWeight(){
+    public void calculateCargoWeight(Item cargo){
         
        // Item item = new Item();
         
@@ -80,18 +82,39 @@ public class U1 extends Rocket{
         
         
         // bring in the Item
-        
+        String cargoName = cargo.getName();
         // add the weight
+        totalCargoWeight += cargo.getWeight();
+       // System.out.println(totalCargoWeight);
+        
+        if (totalCargoWeight < cargoMaxWeight) {
+            System.out.println(cargoName + " good load");
+            System.out.println("TOTAL CARGO WEIGHT = " + totalCargoWeight );
+            
+        } else {
+            // once this fills up  / we need a new rocket
+           // boolean canWeLaunch = launch();
+           // System.out.println(canWeLaunch);
+            
+            System.out.println(totalCargoWeight + " Cargo -" + cargoName 
+                    + " Weight exeeds (" + cargoMaxWeight + " max load)");
+            // reset the total
+            totalCargoWeight=0;
+        }// end if 
+        
+        // this should return a bool once the rocket is full 
+        // and launch the rocket
         
         
         
         
         
-    }// end calculateTotalWeight
+    }// end calculateCargoWeight
 
     @Override
     public String toString() {
-        return "U1 rocket \n"+super.toString() + "totalWeightLimit = " + totalWeightLimit;
+        return "U1 rocket \n"+super.toString() + "totalWeightLimit = " 
+                + totalWeightLimit;
     }
     
     
