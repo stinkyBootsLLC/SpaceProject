@@ -48,4 +48,10 @@ public class Rocket implements SpaceShip{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    
+    // have to load up the rocket and calculate the total weight
+    public void setTotalWeight(){
+        
+    }// end calculateTotalWeight
+    
 }// end SpaceShip
