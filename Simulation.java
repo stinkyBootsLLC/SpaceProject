@@ -17,24 +17,39 @@ starts creating U1 rockets. It first tries to fill up 1 rocket with as many
 items as possible before creating a new rocket object and filling that one until 
 all items are loaded. The method then returns the ArrayList of those U1 rockets 
 that are fully loaded.
-loadU2: this method also takes the ArrayList of Items and starts creating U2 rockets and filling them with those items the same way as with U1 until all items are loaded. The method then returns the ArrayList of those U2 rockets that are fully loaded.
-runSimulation: this method takes an ArrayList of Rockets and calls launch and land methods for each of the rockets in the ArrayList. Every time a rocket explodes or crashes (i.e if launch or land return false) it will have to send that rocket again. All while keeping track of the total budget required to send each rocket safely to Mars. runSimulation then returns the total budget required to send all rockets (including the crashed ones).
+loadU2: this method also takes the ArrayList of Items and starts creating U2 
+rockets and filling them with those items the same way as with U1 until all items 
+are loaded. The method then returns the ArrayList of those U2 rockets that are 
+fully loaded.
+runSimulation: this method takes an ArrayList of Rockets and calls launch and 
+land methods for each of the rockets in the ArrayList. Every time a rocket 
+explodes or crashes (index.e if launch or land return false) it will have to 
+send that rocket again. All while keeping track of the total budget required to 
+send each rocket safely to Mars. runSimulation then returns the total budget 
+required to send all rockets (including the crashed ones).
 
 
 The Mission
 The mission consists of 2 phases:
 
 Phase-1:
-This phase is meant to send building equipment and construction material to help build the colony. In the resources tab, you will find a text file that contains the list of all items that we need to send called 'Phase-1.txt`. Each line in the file contains the itemLine name as well as its weight in Kgs.
+This phase is meant to send building equipment and construction material to help 
+build the colony. In the resources tab, you will find a text file that contains 
+the list of all items that we need to send called 'Phase-1.txt`. Each line in 
+the file contains the itemLine name as well as its weight in Kgs.
 
 The file is here.
 
 Phase-2:
-This phase is meant to send the colony of humans along with some food resources. In the resources tab, you will find a text file that contains the list of all items that we need to send called 'Phase-2.txt`. Each line in the file also contains the itemLine name and its weight in Kgs.
+This phase is meant to send the colony of humans along with some food resources. 
+In the resources tab, you will find a text file that contains the list of all 
+items that we need to send called 'Phase-2.txt`. Each line in the file also 
+contains the itemLine name and its weight in Kgs.
 
 The file is here.
 
-Your job is to run some simulations and test both rocket types for each phase separately.
+Your job is to run some simulations and test both rocket types for each phase 
+separately.
 
 Ready? let's have a look at the details ...
 
@@ -54,12 +69,8 @@ import java.util.*;
  */
 public class Simulation {
     
-    private final ArrayList allitems;
-    private ArrayList cargoItems; // arraylist of Objects
 
     public Simulation() {
-        allitems = new ArrayList();
-        cargoItems = new ArrayList<Item>();
     }// default constructor
     
     /**
@@ -67,11 +78,15 @@ public class Simulation {
      * Each line in the text file consists of the itemLine name followed by 
      * = then its weigh in kg.For example: habitat=100000
      * @param fileName
-     * @return  cargoItems
+     * @return  phase1_Items
      */
     public ArrayList loadItems(File fileName){
         // this file has to be seperated
         // itemLine name is a string and its int weight
+        // declare local arrayList 
+        ArrayList listOfItems = new ArrayList<>();
+        
+        // start reading the text file
         try {
             // need a scanner to read the contents of the file
             // pass the file object
@@ -87,15 +102,7 @@ public class Simulation {
                 String name = itemArray[0];
                 int weight = Integer.parseInt(itemArray[1]);
                 // build the object array list of Item objects
-                cargoItems.add( new Item(name, weight));
-              
-                // debug
-                //System.out.println(cargoItems.toString());
-                // build the arrayList
-                for (String items : itemArray) {
-                //and then add it to an ArrayList of Items. 
-                    allitems.add(items);
-                }// end for (String items : itemArray)
+                listOfItems.add( new Item(name, weight));
             }//end while(extFile.hasNextLine())
             // close the scanner
             extFile.close();
@@ -104,28 +111,11 @@ public class Simulation {
         }// end try catch
         
         // The method should then return that ArrayList.
-        return cargoItems;
+        return listOfItems;
     }// end loadItems
     
-    public void loadU1(){
-        
-                 
-        // this is the file in the directory
-        File phase1 = new File("phase-1.txt");
-        // create an instance of the simulation class
-        Simulation test1 = new Simulation();
-        // loadItems will return an arrayList
-        ArrayList<Item> phase1Items = new ArrayList<Item>();
-         // call the loadItems method and pass the file
-        phase1Items = test1.loadItems(phase1);
-        // debug print the list
-        //System.out.println(phase1Items);
-        //test1.loadItems(phase2);
-        int cargoListSize = phase1Items.size();
-        
-    
-        
-        /*
+    public void loadU1(File cargoFile){
+                /*
         loadU1: this method takes the ArrayList of Items returned from 
         loadItems 
         
@@ -141,25 +131,58 @@ public class Simulation {
 
         
         */
+                 
+        // this is the file in the directory
+       // File cargoFile = new File("phase-1.txt");
+        
+        
+        
+        // create an instance of the simulation class
+        Simulation loadU1RocketSim = new Simulation();
+        // loadItems will return an arrayList
+        ArrayList<Item> phaseItemsList = new ArrayList<Item>();
+         // call the loadItems method and pass the file
+        phaseItemsList = loadU1RocketSim.loadItems(cargoFile); // arrayList is returned
+        // the size of the arrayList
+        int cargoListSize = phaseItemsList.size();
   
-        U1 u1rocket = new U1();
+        // create calculateRocketWeight class instance
+        CalculateRocketWeight calculateRocketWeight = new CalculateRocketWeight();
+        // use to determine once the rocket is full
+        boolean canLaunchRocket = false;
         // load the cargo
-        for (int i = 0; i < cargoListSize; i++) {
-            Item item = new Item();
-            item = phase1Items.get(i);
+        for (int index = 0; index < cargoListSize; index++) {
+            Item cargoItem = new Item();
+            // phaseItemsList is an arrayList
+            // get the index and store the values from arrayList into cargoItem class 
+            cargoItem = phaseItemsList.get(index);
+            // calculate the weight
+            canLaunchRocket = calculateRocketWeight.calculate_U1_CargoWeight(cargoItem);
             
-            u1rocket.calculateCargoWeight(item);
-        }
-       
+            
+            
+            // create a U1 rocket
+            if (canLaunchRocket) {
+                //U1 u1Rocket = new U1(CalculateRocketWeight.totalU1CargoWeight);
+               
+                System.out.println("---------------------------U1 Rocket is full - launch " + U1.numberOfU1Rockets);
+                
+                // debug- 15 items in the file, but only a total 12 loaded onto rocket
+                // there is a problem with the logic here
+                // once the next item exceeds the weight limit - It is not loaded onto the next rocket
+                
+               
+            
+            }// end if
+
+        }// end for (int index = 0; index < cargoListSize; index++) 
+        System.out.println("total items that need to be loaded "+ Item.numberOfItems);
+        System.out.println("total items loaded on a U1 rocket " + CalculateRocketWeight.cargoItemloaded);
+        System.out.println("\n\n");
         
+
         
-        
-        
-        
-        
-        
-        
-        
+ 
         
     }// end loadU1
     
@@ -173,6 +196,7 @@ public class Simulation {
         ArrayList of those U2 rockets that are fully loaded.
         */
         
+   
     }// end loadU2
     
     public void runSimulation(){
@@ -180,7 +204,7 @@ public class Simulation {
     /*
         runSimulation: this method takes an ArrayList of Rockets and calls 
         launch and land methods for each of the rockets in the ArrayList. 
-        Every time a rocket explodes or crashes (i.e if launch or land return 
+        Every time a rocket explodes or crashes (index.e if launch or land return 
         false) it will have to send that rocket again. All while keeping track 
         of the total budget required to send each rocket safely to Mars. 
         runSimulation then returns the total budget required to send all 
@@ -188,6 +212,35 @@ public class Simulation {
 
     */
     }// end runSimulation
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

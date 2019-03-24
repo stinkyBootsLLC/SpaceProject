@@ -11,8 +11,10 @@ package spaceproject;
 public class Item {
     String name;
     int weight;//represent an item to be carried by the rockets
+    public static int numberOfItems;
 
     public Item() {
+        numberOfItems++;
     }// default constructor
 
     public Item(String name, int weight) {
@@ -39,12 +41,6 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" + "name = " + name + ", weight = " + weight + " kg}\n";
-    }
-    
-    
-    
-    
-    
-    
+    }   
     
 }// end Item class

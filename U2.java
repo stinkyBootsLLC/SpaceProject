@@ -59,13 +59,39 @@ public class U2 extends Rocket{
     */
         return true;
     }// end land
+
+    @Override
+    public int getRocketCost() {
+        return rocketCost;
+    }
+
+    @Override
+    public float getRocketWeight() {
+        return rocketWeight;
+    }
+
+    @Override
+    public float getCargoMaxWeight() {
+        return cargoMaxWeight;
+    }
+
+    @Override
+    public float getTotalWeightLimit() {
+        return totalWeightLimit;
+    }
+
+    @Override
+    public double getChanceOfLandingCrash() {
+        return chanceOfLandingCrash;
+    }
+
+    @Override
+    public double getChanceOfLaunchExplosion() {
+        return chanceOfLaunchExplosion;
+    }
     
-    // have to load up the rocket and calculate the total weight
- 
-    public void calculateTotalWeight(){
-        
-    }// end calculateTotalWeight
     
+
     
     
 }// end class

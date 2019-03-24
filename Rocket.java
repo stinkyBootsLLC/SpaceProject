@@ -72,6 +72,33 @@ public class Rocket implements SpaceShip{
         
     }// end setTotalWeight
 
+    public int getRocketCost() {
+        return rocketCost;
+    }
+
+    public float getRocketWeight() {
+        return rocketWeight;
+    }
+
+    public float getCargoMaxWeight() {
+        return cargoMaxWeight;
+    }
+
+    public float getTotalWeightLimit() {
+        return totalWeightLimit;
+    }
+
+    public double getChanceOfLandingCrash() {
+        return chanceOfLandingCrash;
+    }
+
+    public double getChanceOfLaunchExplosion() {
+        return chanceOfLaunchExplosion;
+    }
+    
+    
+    
+
     @Override
     public String toString() {
         return "rocketCost=" + rocketCost + ", \nrocketWeight=" 
